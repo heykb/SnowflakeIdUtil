@@ -1,12 +1,15 @@
 package com.zhu.mine.util;
 
 public class IdUtil {
-    private static SnowflakeIdWorker idWorker;
+
     private IdUtil(){ }
-    public static  long generateId(){
-        if(idWorker == null){
-            idWorker = new SnowflakeIdWorker(1,1);
+
+        private static class SingletonInstance{
+            private static SnowflakeIdWorker idWorker = new SnowflakeIdWorker(1,1);
         }
-        return idWorker.nextId();
+
+        public static  long generateId(){
+            return SingletonInstance.idWorker.nextId();
     }
+
 }
